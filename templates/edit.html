@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <title>My Todo app</title>
+</head>
+<body>
+    <section class="vh-100" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-lg-9 col-xl-7">
+            {% for msg in messages %}
+                <div class="alert alert-success" role="alert">
+                {{msg}} 
+            {% endfor %}
+              <div class="card rounded-3">
+                <div class="card-body p-4">
+                
+                  <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
+                    <i class="fas fa-check-square me-1"></i>
+                    <u>Update My Todo-s</u>
+                  </p>
+                  <hr class="my-4">
+
+                  <form method="POST" action=" " class=" post-form row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
+                    {% csrf_token %}
+                    <div class="pb-2">
+                      <div class="card">
+                        <div class="card-body">
+
+                          <div class="d-flex flex-row align-items-center">
+                            <!-- <input type="text" value="{{ todo_edit_form.task_name }}" name="task_name"> -->
+                            {{todo_edit_form.task_name}}
+                          <div class="me-3">
+                            <!-- <input type="text" value="{{todo_edit_form.status}}" name="status">   -->
+                            {{todo_edit_form.status}}
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <button type="submit" class="btn btn-outline-secondary btn-lg">Update</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+</body>
+</html>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTBZkWWuUHNahSjQZtmeoQYjMvmHe1WYuCT="
+  crossorigin="anonymous"></script>
+
+<script text="javascript">
+    setTimeout(fade_out, 3000);
+    function fade_out() {
+        $(".messages").fadeOut().empty();
+    }
+    $(".post-form")[0].reset(); // this is to reset the form 
+</script>
