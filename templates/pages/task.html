@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        Task List
+      </div>
+    </div>
+</div>
+<hr>
+
+<div class="col-lg-12">
+	<div class="card card-outline card-success">
+		<div class="card-header">
+			<div class="card-tools">
+				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href="#"><i class="fa fa-plus"></i> Add New project</a>
+			</div>
+		</div>
+		<div class="card-body">
+			<table class="table tabe-hover table-condensed" id="list">
+				<colgroup>
+					<col width="5%">
+					<col width="15%">
+					<col width="20%">
+					<col width="15%">
+					<col width="15%">
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+				</colgroup>
+				<thead>
+					<tr>
+						<th class="text-center">#</th>
+						<th>Project</th>
+						<th>Task</th>
+						<th>Project Started</th>
+						<th>Project Due Date</th>
+						<th>Project Status</th>
+						<th>Task Status</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="text-center">1</td>
+						<td>
+							<p><b>School management system</b></p>
+						</td>
+						<td>
+							<p><b>Sign up and login</b></p>
+							<p class="truncate">Complete the sign up and login page</p>
+						</td>
+						<td><b>Nov 03, 2020</b></td>
+						<td><b>Jan 20, 2021</b></td>
+						<td class="text-center">
+							<span class='badge badge-primary'>On-Progress</span>
+							  
+						</td>
+						<td>
+						  	<span class='badge badge-success'>Done</span>
+						<td class="text-center">
+							<button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+		                      Action
+		                    </button>
+			                    <div class="dropdown-menu" style="">
+			                      <a class="dropdown-item new_productivity">Add Productivity</a>
+								</div>
+						</td>
+					</tr>	
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}
+<style>
+	table p{
+		margin: unset !important;
+	}
+	table td{
+		vertical-align: middle !important
+	}
+</style>
+<script>
+	$(document).ready(function(){
+		$('#list').dataTable()
+	$('.new_productivity').click(function(){
+		uni_modal("<i class='fa fa-plus'></i> New Progress for: "+$(this).attr('data-task'),"manage_progress.php?pid="+$(this).attr('data-pid')+"&tid="+$(this).attr('data-tid'),'large')
+	})
+	})
+	function delete_project($id){
+		start_load()
+		$.ajax({
+			url:'ajax.php?action=delete_project',
+			method:'POST',
+			data:{id:$id},
+			success:function(resp){
+				if(resp==1){
+					alert_toast("Data successfully deleted",'success')
+					setTimeout(function(){
+						location.reload()
+					},1500)
+
+				}
+			}
+		})
+	}
+</script>

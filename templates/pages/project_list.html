@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="col-lg-12">
+	<div class="card card-outline card-success">
+		<div class="card-header">
+            <!-- check if login type is 3 -->
+			<div class="card-tools">
+				<a class="btn btn-block btn-sm btn-default btn-flat border-primary" href=" {% url 'new_project' %}"><i class="fa fa-plus"></i> Add New project</a>
+			</div>
+           <!-- end login -->
+		</div>
+		<div class="card-body">
+			<table class="table tabe-hover table-condensed" id="list">
+				<colgroup>
+					<col width="5%">
+					<col width="35%">
+					<col width="15%">
+					<col width="15%">
+					<col width="20%">
+					<col width="10%">
+				</colgroup>
+				<thead>
+					<tr>
+						<th class="text-center">#</th>
+						<th>Project</th>
+						<th>Date Started</th>
+						<th>Due Date</th>
+						<th>Status</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for list in project_list %}
+					<tr>
+						<th class="text-center">{{forloop.counter}}</th>
+						<td>
+							<p><b>{{list.name}}</b></p>
+							<p class="truncate">{{list.description}}</p>
+						</td>
+						<td><b>{{list.start_date}}</b></td>
+						<td><b>{{list.end_date}}</b></td>
+						<td class="text-center">
+                            <span class='badge badge-warning'>{{list.status}}</span>
+
+						</td>
+						<td class="text-center">
+							<button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+		                      Action
+		                    </button>
+		                    <div class="dropdown-menu" style="">
+		                      <a class="dropdown-item view_project" href="#">View</a>
+		                      <div class="dropdown-divider"></div>
+		                      <!-- check if login type is not 3 -->
+		                      <a class="dropdown-item" href="{% url 'edit_project' list.id%}">Edit</a>
+		                      <div class="dropdown-divider"></div>
+		                      <a class="dropdown-item delete_project" href=" {% url 'del_project' list.id%} ">Delete</a>
+		                  <!-- end -->
+		                    </div>
+						</td>
+					</tr>	
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<style>
+	table p{
+		margin: unset !important;
+	}
+	table td{
+		vertical-align: middle !important
+	}
+</style>
+<script>
+	$(document).ready(function(){
+		$('#list').dataTable()
+	
+	$('.delete_project').click(function(){
+	_conf("Are you sure to delete this project?","delete_project",[$(this).attr('data-id')])
+	})
+	})
+	function delete_project($id){
+		start_load()
+		$.ajax({
+			url:'ajax.php?action=delete_project',
+			method:'POST',
+			data:{id:$id},
+			success:function(resp){
+				if(resp==1){
+					alert_toast("Data successfully deleted",'success')
+					setTimeout(function(){
+						location.reload()
+					},1500)
+
+				}
+			}
+		})
+	}
+</script>
+{% endblock %}

@@ -1,1 +1,0 @@
-This is mini todo app using Django python framework 
