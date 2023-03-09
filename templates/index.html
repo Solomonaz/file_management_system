@@ -176,7 +176,7 @@
                         </a>
                         <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
                             <ul>
-                                <li><a href="#"> View Your Post </a> </li>
+                                <li><a href="/manage_post"> Manage Posts </a> </li>
                                 <li><a href="/settings"> Account setting </a> </li>
                                 <li><a href="/logout"> Log Out</a></li>
                             </ul>
@@ -203,18 +203,18 @@
                             <!-- post header-->
                             <div class="flex justify-between items-center px-4 py-3">
                                 <div class="flex flex-1 items-center space-x-4">
-                                    <a href="#">
+                                    <!-- <a href="#">
                                         <div class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-0.5 rounded-full">  
                                             <img src="{{user_profile.profileimg.url}}" class="bg-gray-200 border border-white rounded-full w-8 h-8">
                                         </div>
-                                    </a>
+                                    </a> -->
                                     <span class="block font-semibold "><a href="/profile/{{post.user}}">@{{post.user}}</a></span>
                                 </div>
                               <div>
-                                <!-- <a href="#"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 "></i> </a> -->
-                                <!-- <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100  " uk-drop="mode: hover;pos: top-right"> -->
+                                <!-- <a href="#"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 "></i> </a>
+                                <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100  " uk-drop="mode: hover;pos: top-right">
                               
-                                    <!-- <ul class="space-y-1"> -->
+                                    <ul class="space-y-1"> -->
                                       <!-- <li> 
                                           <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md ">
                                            <i class="uil-share-alt mr-1"></i> Share
@@ -242,10 +242,10 @@
                                           <a href="#" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md ">
                                            <i class="uil-trash-alt mr-1"></i>  Delete Post
                                           </a> 
-                                      </li> -->
-                                    <!-- </ul> -->
+                                      </li>
+                                    </ul>
                                 
-                                <!-- </div> -->
+                                </div> -->
                               </div>
                             </div>
     
@@ -299,7 +299,8 @@
                                 </div> -->
 
                                 <p>
-                                    <a href="/profile/{{post.user}}"><strong>{{post.user}}</strong></a> {{post.caption}}
+                                    <a href="/profile/{{post.user}}"></a> {{post.caption}}
+                                    <!-- <a href="/profile/{{post.user}}"><strong>{{post.user}}</strong></a> {{post.caption}} -->
                                 </p>
 
                                 <!-- <div class="border-t pt-4 space-y-4 ">

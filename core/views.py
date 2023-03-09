@@ -5,6 +5,9 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from itertools import chain
 import random
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from . models import Profile, Post, LikePost, FollowersCount
 
@@ -257,3 +260,23 @@ def signin(request):
 def logout(request):
     auth.logout(request)
     return redirect('signin')
+
+@login_required(login_url='signin')
+def manage_post(request):
+    # user_object = User.objects.get(username=pk)
+    # user_profile = Profile.objects.get(user=user_object)
+    # user_posts = Post.objects.filter(user=pk) 
+
+    # context = {
+    #     'user_object':user_object,
+    #     'user_profile':user_profile,
+    #     'user_posts':user_posts,
+    # }
+
+    return render(request, 'manage_post.html')
+
+@login_required(login_url='signin')
+def delete_post(request, pk):
+    post = get_object_or_404(Post, id=pk, user=request.user)
+    post.delete()
+    return redirect('/')
