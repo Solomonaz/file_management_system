@@ -1,6 +1,6 @@
 @echo off
 
-set "VIRTUAL_ENV=C:\Users\solomon\Desktop\python projects\social_networking_app\env"
+set "VIRTUAL_ENV=C:\Users\solomon\Desktop\python projects\file_management_system\env"
 
 if defined _OLD_VIRTUAL_PROMPT (
     set "PROMPT=%_OLD_VIRTUAL_PROMPT%"
